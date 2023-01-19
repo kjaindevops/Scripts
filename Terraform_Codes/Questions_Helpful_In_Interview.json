@@ -1,0 +1,6 @@
+Question :- Why can't we create S3 bucket in terraform code ? Why we need to manually create it or by using the script ?
+Solution :- That will not work beacuse before any resources gets created in terraform, first it has to go and check the statefile. To do that the bucket must exists. In real time scenario,
+            we need to create the buckets prior, or probably you can have a shell/python script for the creation. Where it will first make sure the bucket is created and then run the 
+            terraform apply or terraform plan.
+
+
