@@ -7,4 +7,16 @@ Question :- What will happen if anyone manually login to the AWS console and ter
 Solution :- It will again create the resource. A refresh will be made before apply, therefore terraform will detect the VM is missing, and will update state accordingly. 
 Then, it will create a new one to match configuration.
 
+Question :- For example you have variable.tf file and in that you have specified by default the cidr_block should be 10.0.0.0/16 but i want to manually change it to 10.0.0.20/16 
+just for the testing pupose without changing the original code ? Is there any way to do that ?
+Solution :- Yes, There is a way to change that in terraform. You can run the following command "terraform apply -var "cidr_block=10.0.0.20/16"". This will not take the default value but it will take the 
+value that you will be providing in this command.
+
+Question :- Suppose there are more than 50 different variables that need to be test without changing the original code. Is there any way we can test it ?
+Solution :- Yes. You can create a new file for example "Dev.tfvars" and you can include those variables in that file. Then you can pass refference to that file name and get things done.
+The extension should be "tfvars". Now at command line you should use "terraform apply -var-file=dev.tfvars -auto-approve". Terraform will apply those by taking the inputs from the mentioned file.
+
+Question :- When I run terraform plan or apply I am getting the confirmation message to apply or destroy it. I want to get rid of it. Is there any way ?
+Solution :- You can run the terraform commands with the -auto-approve option which will not ask for the confirmation.
+
 
