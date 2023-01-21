@@ -31,4 +31,9 @@ command "terraform workspace select prod".
 Question :- How can you have a multiple resources created in a single portion of a code when you are managing multiple workspaces ?
 Solution :- You can have an "count" variable declared in your resource code and apply a condition. Refer --> Introduction_to_loops_and_condition_in_workspace.tf file.
 
+Question :- I have created an VPC in AWS console manually without the use of terraform. How can i make sure that it is managed by Terraform now ?
+Solution :- Suppose you have created the VPC in AWS manually and if you want to have the terraform whcih can manage then you need to create the terraform file and create the resource and you need to update the same values that are currently used 
+by that resources. For example, if you have created the VPC then you should use the same cidr_block and other values. Once you have created the file,
+then you need to provide the following command :- "terraform import <resourcetype.nameoftheresource vpcID". By running this it will generate the statefile if not then it will create a new statefile.
+The import command will work but if you have big environment and code then it will be difficult to manage if you create the resources manually.
 
