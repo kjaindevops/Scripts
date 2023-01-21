@@ -22,5 +22,5 @@ resource "aws_vpc" "Kunal_vpc" {
 }
 
 output "vpc_cidr" {
-  value = aws_vpc.Kunal_vpc
+  value = aws_vpc.Kunal_vpc.cidr_block
 }

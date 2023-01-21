@@ -19,4 +19,12 @@ The extension should be "tfvars". Now at command line you should use "terraform 
 Question :- When I run terraform plan or apply I am getting the confirmation message to apply or destroy it. I want to get rid of it. Is there any way ?
 Solution :- You can run the terraform commands with the -auto-approve option which will not ask for the confirmation.
 
+Question : What do you understand by workspaces in terraform ?
+Solution : You can create workspaces in terraform. Suppose you want to create new environment for example Dev and prod an you want maintain multiple environment. The configuration file will be the same 
+and we want to use the same configuration, then we will be using "Workspaces". Terraform will use the workspace by default which is "default". It is created at the time when we initialize the terraform project.
+Command to list the workspace is "terraform workspace list". If you want to create new different workspaces, you need to use the command "terraform workspace new Dev" and "terraform workspace new Prod".
+Terraform maintains seperate state file for Dev and Prod. You can now create a env: folder in S3 and have Dev and Prod folder there. 
+Now, If you want to create something in Dev workspace then you need to select the Dev workspace. Give the command "terraform workspace select Dev".
+Do terraform apply. Resources got created in Dev which is completely isolated which will be created in Prod. You can use those details in your code. If you want to change the workspace then you can provide the 
+command "terraform workspace select prod".
 
