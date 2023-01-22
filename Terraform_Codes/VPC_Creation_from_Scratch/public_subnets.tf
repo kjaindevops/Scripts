@@ -1,5 +1,5 @@
 data "aws_availability_zones" "azs" {
-  status = "available"
+  state = "available"
 }
 
 locals {
@@ -14,6 +14,15 @@ resource "aws_subnet" "KunalPublicSubnet" {
 
   tags = {
     Name = "KunalPublicSubnet-${count.index + 1}"
+  }
+
+}
+
+resource "aws_internet_gateway" "KunalIGW" {
+  vpc_id = aws_vpc.Kunal_VPC.id
+
+  tags = {
+    Name = "KunalIGW"
   }
 
 }
