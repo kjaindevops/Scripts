@@ -26,3 +26,17 @@ resource "aws_internet_gateway" "KunalIGW" {
   }
 
 }
+
+resource "aws_route_table" "KunalPublicRouteTable" {
+  vpc_id = aws_vpc.Kunal_VPC.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.KunalIGW.id
+  }
+
+  tags = {
+    Name = "KunalPublicRouteTable"
+  }
+
+}
