@@ -3,7 +3,8 @@ data "aws_availability_zones" "azs" {
 }
 
 locals {
-  azs_names = data.aws_availability_zones.azs.names
+  azs_names   = data.aws_availability_zones.azs.names
+  pub_sub_ids = aws_subnet.KunalPublicSubnet.*.id
 }
 
 resource "aws_subnet" "KunalPublicSubnet" {
@@ -39,4 +40,10 @@ resource "aws_route_table" "KunalPublicRouteTable" {
     Name = "KunalPublicRouteTable"
   }
 
+}
+
+resource "aws_route_table_association" "Pub_Sub_association" {
+  count          = length(local.azs_names)
+  route_table_id = aws_route_table.KunalPublicRouteTable.id
+  subnet_id      = local.pub_sub_ids[count.index]
 }
