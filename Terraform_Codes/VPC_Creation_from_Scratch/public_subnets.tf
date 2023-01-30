@@ -8,10 +8,11 @@ locals {
 }
 
 resource "aws_subnet" "KunalPublicSubnet" {
-  count             = length(local.azs_names)
-  vpc_id            = aws_vpc.Kunal_VPC.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index)
-  availability_zone = local.azs_names[count.index]
+  count                   = length(local.azs_names)
+  vpc_id                  = aws_vpc.Kunal_VPC.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index)
+  availability_zone       = local.azs_names[count.index]
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "KunalPublicSubnet-${count.index + 1}"
